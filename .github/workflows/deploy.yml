@@ -113,6 +113,10 @@ jobs:
             --capabilities CAPABILITY_IAM \
             --parameter-overrides \
               FrontendURL=https://${{ secrets.CLOUDFRONT_DOMAIN }}
+              DBHost=${{ secrets.DB_HOST }} \
+              DBName=${{ secrets.DB_NAME }} \
+              DBUser=${{ secrets.DB_USER }} \
+              DBPassword=${{ secrets.DB_PASSWORD }}
 
       - name: Deploy frontend to S3
         run: |
