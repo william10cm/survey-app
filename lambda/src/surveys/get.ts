@@ -4,7 +4,7 @@ import { ok, notFound, serverError } from '../utils/response';
 
 export const handler = async (event: APIGatewayProxyEvent) => {
   try {
-    const { id } = event.pathParameters!;
+    const { surveyId } = event.pathParameters!;
     const pool = await getPool();
     const { rows } = await pool.query(
       `SELECT id, title, description,
@@ -12,7 +12,7 @@ export const handler = async (event: APIGatewayProxyEvent) => {
               created_at  AS "createdAt",
               updated_at  AS "updatedAt"
        FROM surveys WHERE id = $1`,
-      [id]
+      [surveyId]
     );
     if (rows.length === 0) return notFound('Survey not found');
     return ok(rows[0]);

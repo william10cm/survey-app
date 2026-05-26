@@ -5,7 +5,7 @@ import { ok, notFound, serverError } from '../utils/response';
 
 export const handler = async (event: APIGatewayProxyEvent) => {
   try {
-    const { id } = event.pathParameters!;
+    const { surveyId } = event.pathParameters!;
     const { title, description, isPublished } = parseBody<{
       title?: string;
       description?: string;
@@ -24,7 +24,7 @@ export const handler = async (event: APIGatewayProxyEvent) => {
                  is_published AS "isPublished",
                  created_at  AS "createdAt",
                  updated_at  AS "updatedAt"`,
-      [title, description, isPublished, id]
+      [title, description, isPublished, surveyId]
     );
     if (rows.length === 0) return notFound('Survey not found');
     return ok(rows[0]);

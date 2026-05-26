@@ -4,11 +4,11 @@ import { ok, notFound, serverError } from '../utils/response';
 
 export const handler = async (event: APIGatewayProxyEvent) => {
   try {
-    const { id } = event.pathParameters!;
+    const { surveyId } = event.pathParameters!;
     const pool = await getPool();
     const { rowCount } = await pool.query(
       'DELETE FROM surveys WHERE id = $1',
-      [id]
+      [surveyId]
     );
     if (rowCount === 0) return notFound('Survey not found');
     return ok({ message: 'Survey deleted' });

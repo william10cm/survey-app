@@ -58,7 +58,7 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /surveys/{id}
+            Path: /surveys/{surveyId}
             Method: get
 
   CreateSurveyFunction:
@@ -78,7 +78,7 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /surveys/{id}
+            Path: /surveys/{surveyId}
             Method: put
 
   DeleteSurveyFunction:
@@ -90,7 +90,7 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /surveys/{id}
+            Path: /surveys/{surveyId}
             Method: delete
 
   # --- Responses ---
