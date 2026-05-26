@@ -1,0 +1,143 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Api:
+    Cors:
+      AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+      AllowHeaders: "'Content-Type,Authorization'"
+      AllowOrigin: "'*'"
+  Function:
+    Runtime: nodejs20.x
+    Timeout: 10
+    MemorySize: 256
+    Environment:
+      Variables:
+        DB_HOST: survey-app-db.cibee2w2k5lf.us-east-1.rds.amazonaws.com
+        DB_PORT: 5432
+        DB_NAME: survey_app
+        DB_USER: postgres
+        DB_PASSWORD: SofiayDaniella10
+        FRONTEND_URL: d3uefs4q7746ah.cloudfront.net
+        AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+
+Parameters:
+  DBHost:
+    Type: String
+  DBPort:
+    Type: String
+    Default: "5432"
+  DBName:
+    Type: String
+  DBUser:
+    Type: String
+  DBPassword:
+    Type: String
+    NoEcho: true
+  FrontendURL:
+    Type: String
+    Default: "*"
+
+Resources:
+
+  # --- Surveys ---
+  ListSurveysFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: dist/surveys/list.handler
+      Events:
+        Api: { Type: Api, Properties: { Path: /surveys, Method: get } }
+
+  GetSurveyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: dist/surveys/get.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /surveys/{id}
+            Method: get
+
+  CreateSurveyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: dist/surveys/create.handler
+      Events:
+        Api: { Type: Api, Properties: { Path: /surveys, Method: post } }
+
+  UpdateSurveyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: dist/surveys/update.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /surveys/{id}
+            Method: put
+
+  DeleteSurveyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: dist/surveys/delete.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /surveys/{id}
+            Method: delete
+
+  # --- Responses ---
+  SubmitResponseFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: dist/responses/submit.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /surveys/{surveyId}/responses
+            Method: post
+
+  GetResponsesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: dist/responses/list.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /surveys/{surveyId}/responses
+            Method: get
+
+  ListQuestionsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: dist/questions/list.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /surveys/{surveyId}/questions
+            Method: get
+
+  CreateQuestionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: dist/questions/create.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /surveys/{surveyId}/questions
+            Method: post

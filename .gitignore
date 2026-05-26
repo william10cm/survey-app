@@ -1,0 +1,17 @@
+# Environment variables
+.env
+.env.local
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+lambda/dist/
+
+# AWS SAM
+.aws-sam/
+
+# OS files
+.DS_Store
+Thumbs.db

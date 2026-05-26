@@ -1,0 +1,17 @@
+{
+  "name": "survey-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "workspaces": ["frontend", "lambda", "shared"],
+  "scripts": {
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:lambda": "sam local start-api --port 3001",
+    "build": "npm run build --workspace=shared && npm run build --workspace=lambda && npm run build --workspace=frontend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

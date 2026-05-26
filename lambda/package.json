@@ -1,0 +1,24 @@
+{
+  "name": "lambda",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "esbuild src/surveys/list.ts src/surveys/get.ts src/surveys/create.ts src/surveys/update.ts src/surveys/delete.ts src/responses/submit.ts src/responses/list.ts src/questions/list.ts src/questions/create.ts --bundle --platform=node --target=node20 --outdir=dist --format=cjs",
+    "build:watch": "npm run build -- --watch",
+    "typecheck": "tsc --noEmit",
+    "migrate": "ts-node src/db/migrate.ts",
+    "seed": "ts-node src/db/seed.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.0.0",
+    "pg": "^8.11.0",
+    "shared": "*"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.0",
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.0.0",
+    "esbuild": "^0.25.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}
