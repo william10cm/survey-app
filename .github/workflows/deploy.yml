@@ -102,6 +102,21 @@ jobs:
       - name: Install Lambda dependencies
         run: npm ci --workspace=lambda
 
+      - name: Clean up failed stack if in ROLLBACK_COMPLETE state
+        run: |
+          STATUS=$(aws cloudformation describe-stacks \
+            --stack-name survey-app \
+            --region ${{ env.AWS_REGION }} \
+            --query "Stacks[0].StackStatus" \
+            --output text 2>/dev/null || echo "DOES_NOT_EXIST")
+          echo "Current stack status: $STATUS"
+          if [ "$STATUS" = "ROLLBACK_COMPLETE" ]; then
+            echo "Stack is stuck in ROLLBACK_COMPLETE - deleting empty stack so it can be recreated."
+            aws cloudformation delete-stack --stack-name survey-app --region ${{ env.AWS_REGION }}
+            aws cloudformation wait stack-delete-complete --stack-name survey-app --region ${{ env.AWS_REGION }}
+            echo "Stack deleted."
+          fi
+
       - name: Deploy Lambda with SAM
         run: |
           sam deploy \
