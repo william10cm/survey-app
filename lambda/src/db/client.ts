@@ -33,7 +33,12 @@ const getSecrets = async () => {
 export const getPool = async (): Promise<Pool> => {
   if (!pool) {
     const config = await getSecrets();
-    pool = new Pool({ ...config, max: 2, idleTimeoutMillis: 30000 });
+    // RDS rejects non-SSL connections (no pg_hba.conf entry / "no encryption").
+    // rejectUnauthorized:false trusts the RDS-managed cert without bundling a CA.
+    // Disable only for local dev via DB_SSL=false.
+    const ssl =
+      process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false };
+    pool = new Pool({ ...config, ssl, max: 2, idleTimeoutMillis: 30000 });
   }
   return pool;
 };
