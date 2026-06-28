@@ -9,6 +9,7 @@ export const getPool = () => {
             database: process.env.DB_NAME,
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
+            ssl: { rejectUnauthorized: false },
             max: 2, // Lambda: keep pool small (many concurrent functions)
             idleTimeoutMillis: 30000,
             connectionTimeoutMillis: 5000,
