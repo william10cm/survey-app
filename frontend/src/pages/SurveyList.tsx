@@ -4,6 +4,7 @@ import { useSurveys, useCreateSurvey, useDeleteSurvey } from '../hooks/useSurvey
 import heroImage from '../assets/survey-hero.png';
 import type { Survey } from '../types';
 import type { ReactNode } from 'react';
+import './SurveyList.css';
 
 type SurveyFilter = 'all' | 'published' | 'draft';
 

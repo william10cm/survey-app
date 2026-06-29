@@ -10,8 +10,8 @@ export interface Question {
   id: string;
   surveyId: string;
   text: string;
-  type: 'text' | 'multiple_choice' | 'rating' | 'yes_no';
-  options?: string[];      // for multiple_choice
+  type: 'text' | 'multiple_choice' | 'checkbox' | 'rating' | 'yes_no';
+  options?: string[];      // for multiple_choice and checkbox
   required: boolean;
   order: number;
 }

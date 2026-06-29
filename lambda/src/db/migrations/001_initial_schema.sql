@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS questions (
   id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   survey_id   UUID NOT NULL REFERENCES surveys(id) ON DELETE CASCADE,
   text        TEXT NOT NULL,
-  type        VARCHAR(50) NOT NULL CHECK (type IN ('text', 'multiple_choice', 'rating', 'yes_no')),
+  type        VARCHAR(50) NOT NULL CHECK (type IN ('text', 'multiple_choice', 'checkbox', 'rating', 'yes_no')),
   options     JSONB,
   required    BOOLEAN NOT NULL DEFAULT false,
   order_index INTEGER NOT NULL DEFAULT 0,

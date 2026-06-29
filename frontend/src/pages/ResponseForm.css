@@ -1,0 +1,125 @@
+body.response-submitted .app-header {
+  display: none;
+}
+
+body.response-submitted .app-main {
+  padding-top: 0;
+}
+
+.response-form-page {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.response-form-description {
+  color: #6b7280;
+}
+
+.response-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.response-form-question {
+  display: flex;
+  flex-direction: column;
+}
+
+.response-form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.response-form-required {
+  color: #dc2626;
+}
+
+.response-form-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 96px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.response-form-rating-row,
+.response-form-yesno-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.response-form-rating-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 6px;
+  background: #e5e7eb;
+  color: #111111;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.response-form-rating-btn--active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.response-form-yesno-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.5rem;
+  background: #e5e7eb;
+  color: #111111;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.response-form-yesno-btn--active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.response-form-options-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.response-form-option-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.response-form-submit {
+  margin-top: 2rem;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 2rem;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.response-form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.response-form-submitted {
+  padding: 3rem;
+  text-align: center;
+}
+
+.response-form-submitted-icon {
+  margin-bottom: 1rem;
+  font-size: 3rem;
+}
