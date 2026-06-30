@@ -11,7 +11,7 @@ const pool = new Pool({
   port:     Number(process.env.DB_PORT) || 5433,
   database: process.env.DB_NAME     || 'survey_app',
   user:     process.env.DB_USER     || 'postgres',
-  password: process.env.DB_PASSWORD || 'Panera10',
+  password: process.env.DB_PASSWORD || '***********',
   ssl,
 });
 
