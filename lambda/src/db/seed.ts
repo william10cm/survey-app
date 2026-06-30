@@ -5,7 +5,7 @@ const pool = new Pool({
   port: 5433,
   database: 'survey_app',
   user: 'postgres',
-  password: 'Panera10',
+  password: '******',
 });
 
 const seed = async () => {
