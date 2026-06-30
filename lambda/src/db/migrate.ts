@@ -2,12 +2,17 @@ import { Pool } from 'pg';
 import fs from 'fs';
 import path from 'path';
 
+// RDS rejects non-SSL connections; trust the RDS-managed cert without bundling
+// a CA. Disable for local dev via DB_SSL=false (matches db/client.ts).
+const ssl = process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false };
+
 const pool = new Pool({
   host:     process.env.DB_HOST     || 'localhost',
   port:     Number(process.env.DB_PORT) || 5433,
   database: process.env.DB_NAME     || 'survey_app',
   user:     process.env.DB_USER     || 'postgres',
   password: process.env.DB_PASSWORD || 'Panera10',
+  ssl,
 });
 
 const run = async () => {
